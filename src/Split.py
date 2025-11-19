@@ -1,8 +1,7 @@
 from sklearn.model_selection import train_test_split
 import joblib
 class Split:
-    def __init__(self, df, x, y, App):
-        self.df = df
+    def __init__(self,x, y, App):
         self.x = x
         self.y = y
         self.App = App

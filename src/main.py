@@ -1,5 +1,7 @@
 from Label import Label
 from Procces import Procces
+from Vectorize import Vectorize
+from Split import Split
 import joblib
 
 import pandas as pd
@@ -25,9 +27,20 @@ def main():
     spotify_processed = sp_processor.proccesdata()
 
     # 3) dump the cleaned data
-
     joblib.dump(spotify_processed, f'Data\preproccesed\spotify_processed.pkl')
     
+    vectorize = Vectorize(spotify_processed, targetColumn="Review")
+    X = vectorize.transform()
+    y = spotify_processed["Sentiment"]
+
+    # 6) Train-test split + save
+    splitter = Split(X, y, App = "spotify")
+    X_train, X_test, y_train, y_test = splitter.tts()
+    
+    print("X_train:", X_train.shape)
+    print("X_test: ", X_test.shape)
+    print("y_train:", y_train.shape)
+    print("y_test: ", y_test.shape)
 
 
 if __name__ == "__main__":
