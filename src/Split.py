@@ -8,8 +8,6 @@ class Split:
     
     def tts(self):
         X_train,X_test,y_train,y_test = train_test_split(self.x,self.y, random_state= 42, test_size= 0.2)
-        joblib.dump(X_train, f'Data\interim\{self.App}\X_train.pkl')
-        joblib.dump(X_test, f'Data\interim\{self.App}\X_test.pkl')
         joblib.dump(y_train, f'Data\interim\{self.App}\y_train.pkl')
         joblib.dump(y_test, f'Data\interim\{self.App}\y_test.pkl')
         

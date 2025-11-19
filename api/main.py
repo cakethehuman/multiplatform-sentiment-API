@@ -4,8 +4,8 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 import joblib
 
-with open(r"C:\Users\wilsen\OneDrive\Desktop\Sentiment api\models\Spotify_model.pkl", 'rb') as f:
-    model = joblib.load(f)
+model = joblib.load(r"C:\Users\wilsen\OneDrive\Desktop\Sentiment api\models\Spotify_model.pkl")
+vec = joblib.load(r"C:\Users\wilsen\OneDrive\Desktop\Sentiment api\word vectors\Vectorizer.pkl")
 
 app = FastAPI()
 
@@ -19,5 +19,4 @@ async def root():
 @app.post("/sentiment")
 async def sentiment(data: ModelInput):
     pred = model.predict([data.feature])[0]
-    pred = int(pred) if hasattr(pred, "__int__") else pred
-    return {"input": data.feature, "prediction": int(pred)}
+    return pred

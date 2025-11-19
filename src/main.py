@@ -29,18 +29,24 @@ def main():
     # 3) dump the cleaned data
     joblib.dump(spotify_processed, f'Data\preproccesed\spotify_processed.pkl')
     
-    vectorize = Vectorize(spotify_processed, targetColumn="Review")
-    X = vectorize.transform()
-    y = spotify_processed["Sentiment"]
+    X_spotify = spotify_processed["Review"]
+    y_spotify = spotify_processed["Sentiment"]
 
     # 6) Train-test split + save
-    splitter = Split(X, y, App = "spotify")
+    splitter = Split(X_spotify, y_spotify, App = "spotify")
     X_train, X_test, y_train, y_test = splitter.tts()
     
     print("X_train:", X_train.shape)
     print("X_test: ", X_test.shape)
     print("y_train:", y_train.shape)
     print("y_test: ", y_test.shape)
+    
+    Vtr = Vectorize(x_train = X_train, x_test = X_test, App = "spotify")
+    X_train_vec,X_test_vec = Vtr.transform()
+    
+    print(f"hasil vectorize train: {X_train_vec}" )
+    print(f"hasil vectorize test: {X_test_vec}" )
+
 
 
 if __name__ == "__main__":
