@@ -12,7 +12,7 @@ def reviewChanger(df, columnName):
         print(f"The error : {e}")
         return "Uknown"
     
-class label:
+class Label:
     def __init__(self, df, reviewColumnName,App):
         self.df = df
         self.reviewColumnName = reviewColumnName

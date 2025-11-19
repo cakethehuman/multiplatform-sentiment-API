@@ -1,4 +1,4 @@
-from label import label
+from Label import Label
 from Procces import Procces
 import joblib
 
@@ -15,7 +15,7 @@ spotify = spotify.drop(["Time_submitted", 'Total_thumbsup', 'Reply'], axis= 1)
 #        joblib.dump(self.df, f'Data\preproccesed\{self.App}_Cleaned.csv')
 
 # 1) Clean sentiment for Spotify
-sp_cleaner = label(spotify, "Rating", "Spotify")
+sp_cleaner = Label(spotify, "Rating", "Spotify")
 spotify_clean = sp_cleaner.sentiment()
 
 joblib.dump(spotify_clean, f'Data\preproccesed\spotify_clean.pkl')
