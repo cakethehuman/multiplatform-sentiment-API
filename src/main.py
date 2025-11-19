@@ -8,13 +8,11 @@ import pandas as pd
 threads = pd.read_csv(r"Data\raw\threads\threads_reviews.csv")
 spotify = pd.read_csv(r"Data\raw\spotify\reviews.csv")
 
-# Dropping columns
+# Dropping unwanted columns
 threads = threads.drop(['source','review_date'], axis= 1)
 spotify = spotify.drop(["Time_submitted", 'Total_thumbsup', 'Reply'], axis= 1)
 
-#        joblib.dump(self.df, f'Data\preproccesed\{self.App}_Cleaned.csv')
-
-# 1) Clean sentiment for Spotify
+# Data labeling
 sp_cleaner = Label(spotify, "Rating", "Spotify")
 spotify_clean = sp_cleaner.sentiment()
 
