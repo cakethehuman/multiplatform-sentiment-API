@@ -1,10 +1,8 @@
-import joblib
-
 import pandas as pd
 
-def reviewChanger(df, columnName):
+def reviewChanger(row, columnName):
     try : 
-        if df[columnName] > 3:
+        if row[columnName] > 3:
             return "Positive"
         else:
             return "Negative"

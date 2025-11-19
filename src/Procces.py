@@ -29,11 +29,12 @@ class Procces:
         
         # Remove special characters
         
-        self.df[self.targetColumn] = self.df[self.targetColumn].replace(r"[^A-Za-z]", value = " " ,regex = True)   
+        hasil_normalize = self.df[self.targetColumn].replace(r"[^A-Za-z]", value = " " ,regex = True)
+        return hasil_normalize
          
     
     def proccesdata(self):
-        self.normalize()
+        self.df[self.targetColumn] = self.normalize()
         self.df[self.targetColumn] = self.df[self.targetColumn].apply(words)
         return self.df
         

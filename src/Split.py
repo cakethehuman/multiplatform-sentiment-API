@@ -13,3 +13,5 @@ class Split:
         joblib.dump(X_test, f'Data\interim\{self.App}\X_test.pkl')
         joblib.dump(y_train, f'Data\interim\{self.App}\y_train.pkl')
         joblib.dump(y_test, f'Data\interim\{self.App}\y_test.pkl')
+        
+        return X_train,X_test,y_train,y_test
