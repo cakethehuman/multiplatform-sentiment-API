@@ -1,4 +1,5 @@
 import pandas as pd
+from procces import Procces
 import pickle
 from fastapi import FastAPI
 from pydantic import BaseModel
@@ -11,6 +12,8 @@ vec = joblib.load(r"C:\Users\wilsen\OneDrive\Desktop\Sentiment api\word vectors\
 
 print(vec)
 
+
+test = Procces()
 X = vec.transform(["the ads sucks"])
 pred = model.predict(X)[0]
 print(pred)

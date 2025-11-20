@@ -17,13 +17,13 @@ def main():
     spotify = spotify.drop(["Time_submitted", 'Total_thumbsup', 'Reply'], axis= 1)
 
     # Data labeling
-    sp_cleaner = Label(spotify, "Rating", "Spotify")
-    spotify_clean = sp_cleaner.sentiment()
+    sp_label = Label(spotify, "Rating", "Spotify")
+    spotify_label = sp_label.sentiment()
 
-    joblib.dump(spotify_clean, f'Data\preproccesed\spotify_clean.pkl')
+    joblib.dump(spotify_label, f'Data\preproccesed\spotify_clean.pkl')
 
     # 2) Process text (assume review column is called "Review" or similar)
-    sp_processor = Procces(spotify_clean, "Review")
+    sp_processor = Procces(spotify_label, "Review")
     spotify_processed = sp_processor.proccesdata()
 
     # 3) dump the cleaned data
