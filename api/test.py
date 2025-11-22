@@ -12,9 +12,12 @@ vec = joblib.load(r"C:\Users\wilsen\OneDrive\Desktop\Sentiment api\word vectors\
 
 print(vec)
 
-
-test = Procces()
-X = vec.transform(["the ads sucks"])
-pred = model.predict(X)[0]
-print(pred)
+words = ["Test words for what ever lmao yea so much apps like cmon man"]
+word_df = pd.DataFrame(words, columns= ["words"])
+# words.columns = "Words"
+Wordsdf = Procces(word_df, "words")
+hasilwords = Wordsdf.proccesdata()
+# words = vec.transform(words.to_list())
+# pred = model.predict(words)[0]
+print(hasilwords)
 # print(preds)

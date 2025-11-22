@@ -2,10 +2,10 @@ import pandas as pd
 import pickle
 from fastapi import FastAPI
 from pydantic import BaseModel
+from procces import Procces
 import joblib
 
 model = joblib.load(r"C:\Users\wilsen\OneDrive\Desktop\Sentiment api\models\Spotify_model.pkl")
-vec = joblib.load(r"C:\Users\wilsen\OneDrive\Desktop\Sentiment api\word vectors\Vectorizer.pkl")
 
 app = FastAPI()
 
@@ -20,3 +20,5 @@ async def root():
 async def sentiment(data: ModelInput):
     pred = model.predict([data.feature])[0]
     return pred
+
+pri
