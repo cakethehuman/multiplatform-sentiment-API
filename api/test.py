@@ -18,6 +18,6 @@ word_df = pd.DataFrame(words, columns= ["words"])
 Wordsdf = Procces(word_df, "words")
 hasilwords = Wordsdf.proccesdata()
 # words = vec.transform(words.to_list())
-# pred = model.predict(words)[0]
-print(hasilwords)
+pred = model.predict(hasilwords)[0]
+print(pred)
 # print(preds)

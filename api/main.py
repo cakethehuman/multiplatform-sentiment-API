@@ -10,7 +10,7 @@ model = joblib.load(r"C:\Users\wilsen\OneDrive\Desktop\Sentiment api\models\Spot
 app = FastAPI()
 
 class ModelInput(BaseModel):
-    feature: str
+    feature: list[str]
 
 @app.get("/")
 async def root():
@@ -18,7 +18,8 @@ async def root():
 
 @app.post("/sentiment")
 async def sentiment(data: ModelInput):
-    pred = model.predict([data.feature])[0]
-    return pred
-
-pri
+    word_df = pd.DataFrame(data.feature, columns= ["words"])
+    Wordsdf = Procces(word_df, "words")
+    hasilwords = Wordsdf.proccesdata()
+    pred = model.predict(hasilwords)[0]
+    return {"Hasil" : str(pred)}

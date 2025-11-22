@@ -43,7 +43,8 @@ class Procces:
     def proccesdata(self):
         self.words[self.cols] = self.normalize()
         self.words[self.cols] = self.words[self.cols].apply(words)
-        return self.words
+        vectors = vec.transform(self.words[self.cols])
+        return vectors
         
 
 # p = ['sdwdw']
