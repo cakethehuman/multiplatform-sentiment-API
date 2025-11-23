@@ -15,7 +15,7 @@ class Vectorize:
         
         joblib.dump(X_train, f'Data\interim\{self.App}\X_train.pkl')
         joblib.dump(X_test, f'Data\interim\{self.App}\X_test.pkl')
-        joblib.dump(tf, "word vectors\Vectorizer.pkl")
+        joblib.dump(tf, f"word vectors\{self.App}_Vectorizer.pkl")
         
         
         return X_train,X_test

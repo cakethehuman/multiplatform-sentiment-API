@@ -12,7 +12,8 @@ nltk.download('punkt_tab')
 nltk.download('stopwords')
 nltk.download('wordnet')
 
-vec = joblib.load(r"C:\Users\wilsen\OneDrive\Desktop\Sentiment api\word vectors\Vectorizer.pkl")
+SpotifyVec = joblib.load(r"word vectors\Spotify_Vectorizer.pkl")
+ThreadsVec = joblib.load(r"word vectors\Threads_Vectorizer.pkl")
 
 wnl = WordNetLemmatizer()
 
@@ -27,9 +28,10 @@ def words(txt):
     return " ".join(filter) 
 
 class Procces:
-    def __init__(self, words, cols):
+    def __init__(self, words, cols, App):
         self.words = words
         self.cols = cols
+        self.App = App
 
         
     def normalize(self):
@@ -43,6 +45,13 @@ class Procces:
     def proccesdata(self):
         self.words[self.cols] = self.normalize()
         self.words[self.cols] = self.words[self.cols].apply(words)
+        
+        if self.App == "Spotify":
+            vec = SpotifyVec
+        elif self.App == "Threads":
+            vec = ThreadsVec
+        else:
+            vec = SpotifyVec
         vectors = vec.transform(self.words[self.cols])
         return vectors
         

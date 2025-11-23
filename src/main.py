@@ -51,10 +51,10 @@ def main():
     threads = threads.drop(['source','review_date'], axis= 1)
     spotify = spotify.drop(["Time_submitted", 'Total_thumbsup', 'Reply'], axis= 1)
     
-    # spotifyRatingColumn = "Rating"
-    # spotifyName = "Spotify"
-    # spotifyTextColumn = "Review"
-    # setup(spotify, spotifyRatingColumn, spotifyName, spotifyTextColumn)
+    spotifyRatingColumn = "Rating"
+    spotifyName = "Spotify"
+    spotifyTextColumn = "Review"
+    setup(spotify, spotifyRatingColumn, spotifyName, spotifyTextColumn)
     
     threadsRatingColumn = 'rating'
     threadsAppName = "Threads"

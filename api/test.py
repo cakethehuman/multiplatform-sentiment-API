@@ -7,17 +7,7 @@ import joblib
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 
-model = joblib.load(r"C:\Users\wilsen\OneDrive\Desktop\Sentiment api\models\Spotify_model.pkl")
+model = joblib.load(r"models\Spotify_model.pkl")
 vec = joblib.load(r"C:\Users\wilsen\OneDrive\Desktop\Sentiment api\word vectors\Vectorizer.pkl")
 
-print(vec)
-
-words = ["Test words for what ever lmao yea so much apps like cmon man"]
-word_df = pd.DataFrame(words, columns= ["words"])
-# words.columns = "Words"
-Wordsdf = Procces(word_df, "words")
-hasilwords = Wordsdf.proccesdata()
-# words = vec.transform(words.to_list())
-pred = model.predict(hasilwords)[0]
-print(pred)
-# print(preds)
+print(model)
