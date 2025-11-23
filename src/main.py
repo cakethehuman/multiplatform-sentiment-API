@@ -47,7 +47,19 @@ def main():
     threads = pd.read_csv(r"Data\raw\threads\threads_reviews.csv")
     spotify = pd.read_csv(r"Data\raw\spotify\reviews.csv")
     
-    setup(threads, "Rating", "Spotify", "Review")
+    # Dropping unwanted columns
+    threads = threads.drop(['source','review_date'], axis= 1)
+    spotify = spotify.drop(["Time_submitted", 'Total_thumbsup', 'Reply'], axis= 1)
+    
+    # spotifyRatingColumn = "Rating"
+    # spotifyName = "Spotify"
+    # spotifyTextColumn = "Review"
+    # setup(spotify, spotifyRatingColumn, spotifyName, spotifyTextColumn)
+    
+    threadsRatingColumn = 'rating'
+    threadsAppName = "Threads"
+    threadsTextColumn = 'review_description'
+    setup(threads, threadsRatingColumn, threadsAppName, threadsTextColumn)
 
 
 if __name__ == "__main__":
