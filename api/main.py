@@ -5,8 +5,8 @@ from pydantic import BaseModel
 from procces import Procces
 import joblib
 
-SpotifyModel = joblib.load(r"models\Spotify_model.pkl")
-ThreadsModel = joblib.load(r"models\Threads_model.pkl")
+SpotifyModel = joblib.load(r"..\models\Spotify_model.pkl")
+ThreadsModel = joblib.load(r"..\models\Threads_model.pkl")
 
 app = FastAPI()
 
@@ -18,19 +18,26 @@ class ModelInput(BaseModel):
 async def root():
     return {"status": "ok"}
 
+def keluarkanhasil(word_df, App, model):
+    Wordsdf = Procces(word_df, "words", App)
+    hasilwords = Wordsdf.proccesdata()
+    pred = model.predict(hasilwords)[0]
+    return pred
+
+
 @app.post("/sentiment")
 async def sentiment(data: ModelInput):
     word_df = pd.DataFrame(data.feature, columns= ["words"])
-    Wordsdf = Procces(word_df, "words", data.App)
-    hasilwords = Wordsdf.proccesdata()
+
     
-    if data.app == "Spotify":
-        model = SpotifyModel
-    elif data.app == "Threads":
-        model = ThreadsModel
+    if data.App == "Spotify":
+        pred = keluarkanhasil(word_df, data.App, SpotifyModel)
+        return {f"hasil : {pred}"}
+    elif data.App == "Threads":
+        pred = keluarkanhasil(word_df, data.App, ThreadsModel)
+        return {f"hasil : {pred}"}
     else:
         return {"Please pick a valid APP"}
-    
-    pred = model.predict(hasilwords)[0]
-    return {"Hasil": str(pred)}
+        
+
 

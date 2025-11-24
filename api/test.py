@@ -7,7 +7,7 @@ import joblib
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 
-model = joblib.load(r"models\Spotify_model.pkl")
-vec = joblib.load(r"C:\Users\wilsen\OneDrive\Desktop\Sentiment api\word vectors\Vectorizer.pkl")
+model = joblib.load(r"../word vectors\Spotify_Vectorizer.pkl")
+
 
 print(model)

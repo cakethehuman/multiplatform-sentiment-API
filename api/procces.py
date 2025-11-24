@@ -12,8 +12,8 @@ nltk.download('punkt_tab')
 nltk.download('stopwords')
 nltk.download('wordnet')
 
-SpotifyVec = joblib.load(r"word vectors\Spotify_Vectorizer.pkl")
-ThreadsVec = joblib.load(r"word vectors\Threads_Vectorizer.pkl")
+SpotifyVec = joblib.load(r"..\word vectors\Spotify_Vectorizer.pkl")
+ThreadsVec = joblib.load(r"..\word vectors\Threads_Vectorizer.pkl")
 
 wnl = WordNetLemmatizer()
 
@@ -52,6 +52,7 @@ class Procces:
             vec = ThreadsVec
         else:
             vec = SpotifyVec
+            
         vectors = vec.transform(self.words[self.cols])
         return vectors
         
