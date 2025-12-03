@@ -12,7 +12,7 @@ def setup(Data, ratingcolumn, App, textColumn):
     label = Label(Data, ratingcolumn, App)
     hasillabel = label.sentiment()
     
-    # Dump the data for anlize
+    # Dump the data to analize before applying any techique
     joblib.dump(hasillabel, f'Data\preproccesed\{App}\{App}_clean.pkl')
     
     # 2. Preprocess data
@@ -45,21 +45,32 @@ def main():
     
     # Insert data
     threads = pd.read_csv(r"Data\raw\threads\threads_reviews.csv")
-    spotify = pd.read_csv(r"Data\raw\spotify\reviews.csv")
+    Instagram = pd.read_csv(r"Data\raw\Instagram\instagram.csv")
+    # spotify = pd.read_csv(r"Data\raw\spotify\reviews.csv")
     
     # Dropping unwanted columns
-    threads = threads.drop(['source','review_date'], axis= 1)
-    spotify = spotify.drop(["Time_submitted", 'Total_thumbsup', 'Reply'], axis= 1)
+    # threads = threads.drop(['source','review_date'], axis= 1)
+    Instagram = Instagram.drop(['review_date'], axis = 1)
+    # spotify = spotify.drop(["Time_submitted", 'Total_thumbsup', 'Reply'], axis= 1)
     
-    spotifyRatingColumn = "Rating"
-    spotifyName = "Spotify"
-    spotifyTextColumn = "Review"
-    setup(spotify, spotifyRatingColumn, spotifyName, spotifyTextColumn)
+    # Spotify
+    # spotifyRatingColumn = "Rating"
+    # spotifyName = "Spotify"
+    # spotifyTextColumn = "Review"
+    # setup(spotify, spotifyRatingColumn, spotifyName, spotifyTextColumn)
+    # print(threads)
+    print(Instagram)
+    # Instargram
+    InstagramRatingColumn = "rating"
+    InstagramName = "Instagram"
+    InstagramSpotifyTextColumn = 'review_description'
+    setup(Instagram, InstagramRatingColumn, InstagramName, InstagramSpotifyTextColumn)
     
-    threadsRatingColumn = 'rating'
-    threadsAppName = "Threads"
-    threadsTextColumn = 'review_description'
-    setup(threads, threadsRatingColumn, threadsAppName, threadsTextColumn)
+    # Threads
+    # threadsRatingColumn = 'rating'
+    # threadsAppName = "Threads"
+    # threadsTextColumn = 'review_description'
+    # setup(threads, threadsRatingColumn, threadsAppName, threadsTextColumn)
 
 
 if __name__ == "__main__":

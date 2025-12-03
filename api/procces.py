@@ -14,6 +14,7 @@ nltk.download('wordnet')
 
 SpotifyVec = joblib.load(r"..\word vectors\Spotify_Vectorizer.pkl")
 ThreadsVec = joblib.load(r"..\word vectors\Threads_Vectorizer.pkl")
+InstagramVec = joblib.load(r"..\word vectors\Instagram_Vectorizer.pkl")
 
 wnl = WordNetLemmatizer()
 
@@ -46,10 +47,12 @@ class Procces:
         self.words[self.cols] = self.normalize()
         self.words[self.cols] = self.words[self.cols].apply(words)
         
-        if self.App == "Spotify":
+        if self.App.lower() == "spotify":
             vec = SpotifyVec
-        elif self.App == "Threads":
+        elif self.App.lower() == "threads":
             vec = ThreadsVec
+        elif self.App.lower() == "instagram":
+            vec = InstagramVec
         else:
             vec = SpotifyVec
             

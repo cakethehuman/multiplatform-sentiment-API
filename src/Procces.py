@@ -13,6 +13,7 @@ wnl = WordNetLemmatizer()
 stop_words = set(stopwords.words("english"))
 
 
+
 # Apply Stop words removal and lemmatization
 def words(txt):
     words = word_tokenize(txt)

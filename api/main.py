@@ -7,6 +7,7 @@ import joblib
 
 SpotifyModel = joblib.load(r"..\models\Spotify_model.pkl")
 ThreadsModel = joblib.load(r"..\models\Threads_model.pkl")
+InstagramModel = joblib.load(r"..\models\Instagram_model.pkl")
 
 app = FastAPI()
 
@@ -28,16 +29,30 @@ def keluarkanhasil(word_df, App, model):
 @app.post("/sentiment")
 async def sentiment(data: ModelInput):
     word_df = pd.DataFrame(data.feature, columns= ["words"])
+    
+    match data.App.lower():
+        case "spotify":
+            pred = keluarkanhasil(word_df, data.App, SpotifyModel)
+            return {f"hasil : {pred}"}
+        case "threads":
+            pred = keluarkanhasil(word_df, data.App, ThreadsModel)
+            return {f"hasil : {pred}"}
+        case "instagram":
+            pred = keluarkanhasil(word_df ,data.App, InstagramModel)
+            return {f"hasil : {pred}"}
+        case _:  # Default case, equivalent to 'else'
+            return {"Please pick a valid APP"}
+
 
     
-    if data.App == "Spotify":
-        pred = keluarkanhasil(word_df, data.App, SpotifyModel)
-        return {f"hasil : {pred}"}
-    elif data.App == "Threads":
-        pred = keluarkanhasil(word_df, data.App, ThreadsModel)
-        return {f"hasil : {pred}"}
-    else:
-        return {"Please pick a valid APP"}
+    # if data.App == "Spotify":
+    #     pred = keluarkanhasil(word_df, data.App, SpotifyModel)
+    #     return {f"hasil : {pred}"}
+    # elif data.App == "Threads":
+    #     pred = keluarkanhasil(word_df, data.App, ThreadsModel)
+    #     return {f"hasil : {pred}"}
+    # else:
+    #     return {"Please pick a valid APP"}
         
 
 
