@@ -1,13 +1,5 @@
-import pandas as pd
-from procces import Procces
-import pickle
-from fastapi import FastAPI
-from pydantic import BaseModel
-import joblib
+import numpy as np
 
-from sklearn.feature_extraction.text import TfidfVectorizer
-
-model = joblib.load(r"../word vectors\Spotify_Vectorizer.pkl")
-
-
-print(model)
+arr = [10,1,1]
+a = np.argmax(arr)
+print(arr[a])

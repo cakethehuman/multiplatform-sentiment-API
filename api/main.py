@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 import pickle
 from fastapi import FastAPI
 from pydantic import BaseModel
@@ -23,7 +24,10 @@ def keluarkanhasil(word_df, App, model):
     Wordsdf = Procces(word_df, "words", App)
     hasilwords = Wordsdf.proccesdata()
     pred = model.predict(hasilwords)[0]
-    return pred
+    proba = model.predict_proba(hasilwords)[0]
+    index = np.argmax(proba)
+    score = proba[index]
+    return pred,score
 
 
 @app.post("/sentiment")
@@ -32,14 +36,26 @@ async def sentiment(data: ModelInput):
     
     match data.App.lower():
         case "spotify":
-            pred = keluarkanhasil(word_df, data.App, SpotifyModel)
-            return {f"hasil : {pred}"}
+            pred,score = keluarkanhasil(word_df, data.App, SpotifyModel)
+            return {
+                "App" : data.App,
+                "sentiment": pred,
+                "confidence": round(float(score),2)
+            }
         case "threads":
-            pred = keluarkanhasil(word_df, data.App, ThreadsModel)
-            return {f"hasil : {pred}"}
+            pred,score = keluarkanhasil(word_df, data.App, ThreadsModel)
+            return {
+                "App" : data.App,
+                "sentiment": pred,
+                "confidence": round(float(score),2)
+            }
         case "instagram":
-            pred = keluarkanhasil(word_df ,data.App, InstagramModel)
-            return {f"hasil : {pred}"}
+            pred,score = keluarkanhasil(word_df, data.App, InstagramModel)
+            return {
+                "App" : data.App,
+                "sentiment": pred,
+                "confidence": round(float(score),2)
+            }
         case _:  # Default case, equivalent to 'else'
             return {"Please pick a valid APP"}
 
